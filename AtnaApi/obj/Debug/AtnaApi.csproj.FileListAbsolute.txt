@@ -1,4 +1,0 @@
-C:\Users\justi_000\Documents\SVN\AtnaApi\AtnaApi\AtnaApi\bin\Debug\AtnaApi.dll
-C:\Users\justi_000\Documents\SVN\AtnaApi\AtnaApi\AtnaApi\bin\Debug\AtnaApi.pdb
-C:\Users\justi_000\Documents\SVN\AtnaApi\AtnaApi\AtnaApi\obj\Debug\AtnaApi.dll
-C:\Users\justi_000\Documents\SVN\AtnaApi\AtnaApi\AtnaApi\obj\Debug\AtnaApi.pdb
