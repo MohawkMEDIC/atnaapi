@@ -35,7 +35,7 @@ namespace AtnaApi.Transport
         /// <summary>
         /// Gets the endpoint that messages are sent to
         /// </summary>
-        EndPoint EndPoint { get; }
+        String EndPoint { get; set; }
 
         /// <summary>
         /// Send a message to the remote endpoint

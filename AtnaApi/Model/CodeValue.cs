@@ -133,6 +133,9 @@ namespace AtnaApi.Model
                     object[] category = fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
                     if (category.Length > 0)
                         return (category[0] as DescriptionAttribute).Description;
+                    else
+                        return this.StrongCode.ToString();
+
                 }
                 return null;
             }

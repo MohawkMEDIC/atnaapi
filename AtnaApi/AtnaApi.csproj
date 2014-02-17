@@ -40,6 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\AuditableObjectAttribute.cs" />
+    <Compile Include="Attributes\AuditActorAttribute.cs" />
+    <Compile Include="Attributes\EventIdentificationFieldAttribute.cs" />
+    <Compile Include="AuditUtil.cs" />
     <Compile Include="Model\ActionType.cs" />
     <Compile Include="Model\AuditableObejctType.cs" />
     <Compile Include="Model\AuditableObject.cs" />
@@ -58,8 +62,11 @@
     <Compile Include="Model\ObjectDetailType.cs" />
     <Compile Include="Model\OutcomeIndicator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transport\FileSyslogTransport.cs" />
     <Compile Include="Transport\ITransporter.cs" />
-    <Compile Include="Transport\SyslogPublisher.cs" />
+    <Compile Include="Transport\TcpSyslogTransport.cs" />
+    <Compile Include="Transport\AuditTransportUtil.cs" />
+    <Compile Include="Transport\UdpSyslogTransport.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

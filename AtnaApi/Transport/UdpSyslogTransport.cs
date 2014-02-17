@@ -37,7 +37,7 @@ namespace AtnaApi.Transport
     /// Represents an ATNA Client
     /// </summary>
     [Description("BSD Syslog over UDP")]
-    public class SyslogTransport : ITransporter
+    public class UdpSyslogTransport : ITransporter
     {
         // Represents the remote endpoint that is being connected
         private IPEndPoint m_remoteEndpoint;
@@ -46,9 +46,16 @@ namespace AtnaApi.Transport
         public const int SYSLOG_FACILITY = 10;
 
         /// <summary>
+        /// Default ctor
+        /// </summary>
+        public UdpSyslogTransport()
+        {
+        }
+
+        /// <summary>
         /// Creates a new instance of the ATNA client
         /// </summary>
-        public SyslogTransport(IPEndPoint endpoint)
+        public UdpSyslogTransport(IPEndPoint endpoint)
         {
             this.m_remoteEndpoint = endpoint;
         }
@@ -56,19 +63,38 @@ namespace AtnaApi.Transport
         /// <summary>
         /// Creates a new instance of the Syslog transport
         /// </summary>
-        public SyslogTransport(DnsEndPoint endpoint)
+        public UdpSyslogTransport(DnsEndPoint endpoint)
+        {
+            this.SetEndpointDns(endpoint);
+        }
+        /// <summary>
+        /// Set the endpoint as a dns entry
+        /// </summary>
+        /// <param name="endpoint"></param>
+        private void SetEndpointDns(DnsEndPoint endpoint)
         {
             var addresses = Dns.GetHostEntry(endpoint.Host);
             if (addresses.AddressList.Count() == 0)
                 throw new InvalidOperationException("Cannot create a syslog transport as the hostname doesn't resolve to an IP Address");
             this.m_remoteEndpoint = new IPEndPoint(addresses.AddressList.First(), endpoint.Port);
-
         }
 
         /// <summary>
         /// Create the endpoint
         /// </summary>
-        public EndPoint EndPoint { get { return m_remoteEndpoint; } }
+        public String EndPoint
+        {
+            get { return m_remoteEndpoint.ToString(); }
+            set 
+            {
+                string[] part = value.Split(':');
+                IPAddress ipAdd = null;
+                if (IPAddress.TryParse(part[0], out ipAdd))
+                    this.m_remoteEndpoint = new IPEndPoint(ipAdd, Int32.Parse(part[1]));
+                else
+                    this.SetEndpointDns(new DnsEndPoint(part[0], Int32.Parse(part[1])));
+            }
+        }
 
         /// <summary>
         /// Send a message to the ATNA client
@@ -105,7 +131,7 @@ namespace AtnaApi.Transport
 
                 syslogmessage.AppendFormat("<{0}>1 {1:yyyy-MM-dd}T{1:HH:mm:ss.fff}Z {2} {3} {4} IHE+RFC-3881 - ",
                     (SYSLOG_FACILITY * 8) + severity, DateTime.UtcNow, fqdn, Process.GetCurrentProcess().ProcessName, Process.GetCurrentProcess().Id);
-                syslogmessage.Append(CreateMessageBody(am));
+                syslogmessage.Append(AuditTransportUtil.CreateMessageBody(am));
 
                 // Send the message
                 // Create the dgram
@@ -122,18 +148,6 @@ namespace AtnaApi.Transport
             }
         }
 
-        /// <summary>
-        /// Create the message body
-        /// </summary>
-        private string CreateMessageBody(AuditMessage am)
-        {
-            StringWriter sw = new StringWriter();
-            XmlWriter xw = XmlWriter.Create(sw, new XmlWriterSettings() { OmitXmlDeclaration = true, Indent = false });
-            XmlSerializer xsz = new XmlSerializer(typeof(AuditMessage));
-            xsz.Serialize(xw, am);
-            xw.Close();
-            return sw.ToString();
-        }
 
     }
 }
