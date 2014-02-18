@@ -98,7 +98,7 @@ namespace AtnaApi
                             auditObj.ObjectSpec = displayNameBuilder.ToString();
                         }
 
-                        if (workingList.Exists(i => i.ObjectId == auditObj.ObjectId && i.ObjectSpecChoice == auditObj.ObjectSpecChoice && i.ObjectSpec == auditObj.ObjectSpec && i.Role == auditObj.Role && i.Type == auditObj.Type && i.IDTypeCode == auditObj.IDTypeCode))
+                        if (workingList.Exists(i => i.ObjectId == auditObj.ObjectId && i.Role == auditObj.Role && i.Type == auditObj.Type))
                             Trace.TraceWarning("Already informed audit of object {0}.{1}, skipping", auditObj.ObjectSpec, auditObj.ObjectId);
                         else
                             workingList.Add(auditObj);

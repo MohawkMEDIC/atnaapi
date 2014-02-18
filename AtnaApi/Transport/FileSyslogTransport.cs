@@ -31,10 +31,10 @@ namespace AtnaApi.Transport
         {
             String message = AuditTransportUtil.CreateMessageBody(am);
             // Rotates the logs each day
-            String fileName = String.Format("{0}.{1}.{2}",
+            String fileName = Path.Combine(Path.GetDirectoryName(this.EndPoint), String.Format("{0}.{1}.{2}",
                 Path.GetFileNameWithoutExtension(this.EndPoint),
                 DateTime.Now.ToString("yyyyMMdd"),
-                Path.GetExtension(this.EndPoint));
+                Path.GetExtension(this.EndPoint)));
 
             try
             {
