@@ -79,7 +79,13 @@ namespace AtnaApi.Model
         Disclosure,
         [Category("CDT")]
         [XmlEnum("CDT-100002")]
-        CDTPatientSearchActivity
+        CDTPatientSearchActivity,
+        [Category("DCM")]
+        [XmlEnum("110132")]
+        UseOfRestrictedFunction,
+        [Category("DCM")]
+        [XmlEnum("110127")]
+        EmergencyOverrideStarted,
 
     }
 
