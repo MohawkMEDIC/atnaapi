@@ -31,6 +31,10 @@ namespace AtnaApi.Transport
     /// </summary>
     public interface ITransporter
     {
+        /// <summary>
+        /// Gets or sets the message format
+        /// </summary>
+        MessageFormatType MessageFormat { get; set; }
 
         /// <summary>
         /// Gets the endpoint that messages are sent to

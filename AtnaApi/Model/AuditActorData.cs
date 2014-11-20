@@ -48,7 +48,7 @@ namespace AtnaApi.Model
         /// <summary>
         /// Identifies the network access point from which the user accessed the system
         /// </summary>
-        [XmlAttribute("NetworkAccessPointId")]
+        [XmlAttribute("NetworkAccessPointID")]
         public string NetworkAccessPointId { get; set; }
         /// <summary>
         /// Identifies the type of network access point

@@ -15,6 +15,8 @@ namespace AtnaApi.Transport
     [Description("BSD Syslog File Appender")]
     public class FileSyslogTransport : ITransporter
     {
+
+
         /// <summary>
         /// Gets or sets the endpoint (file) to be appended
         /// </summary>
@@ -29,7 +31,7 @@ namespace AtnaApi.Transport
         /// </summary>
         public void SendMessage(Model.AuditMessage am)
         {
-            String message = AuditTransportUtil.CreateMessageBody(am);
+            String message = AuditTransportUtil.CreateMessageBodyEx(am,this.MessageFormat);
             // Rotates the logs each day
             String fileName = Path.Combine(Path.GetDirectoryName(this.EndPoint), String.Format("{0}.{1}.{2}",
                 Path.GetFileNameWithoutExtension(this.EndPoint),
@@ -46,5 +48,10 @@ namespace AtnaApi.Transport
                 Trace.TraceError("Could not write audit to file {0}. Error was {1}.\r\nMessage:\r\n{2}", fileName, e, message);
             }
         }
+
+        /// <summary>
+        /// Gets or sets the message format
+        /// </summary>
+        public MessageFormatType MessageFormat { get; set; }
     }
 }

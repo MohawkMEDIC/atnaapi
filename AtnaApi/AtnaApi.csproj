@@ -64,6 +64,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Transport\FileSyslogTransport.cs" />
     <Compile Include="Transport\ITransporter.cs" />
+    <Compile Include="Transport\MessageFormatType.cs" />
+    <Compile Include="Transport\STcpSyslogTransport.cs" />
     <Compile Include="Transport\TcpSyslogTransport.cs" />
     <Compile Include="Transport\AuditTransportUtil.cs" />
     <Compile Include="Transport\UdpSyslogTransport.cs" />

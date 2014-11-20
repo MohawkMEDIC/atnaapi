@@ -82,42 +82,7 @@ namespace AtnaApi.Transport
             try
             {
                 tcpClient.Connect(this.m_remoteEndpoint);
-                StringBuilder syslogmessage = new StringBuilder();
-                int severity = 7;
-                switch (am.EventIdentification.EventOutcome)
-                {
-                    case OutcomeIndicator.Success:
-                        severity = 5;
-                        break;
-                    case OutcomeIndicator.MinorFail:
-                        severity = 4;
-                        break;
-                    default:
-                        severity = 3;
-                        break;
-                }
-
-                string domainName = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
-                string hostName = Dns.GetHostName();
-                string fqdn = "";
-                if (!hostName.Contains(domainName))
-                    fqdn = hostName + "." + domainName;
-                else
-                    fqdn = hostName;
-
-
-                syslogmessage.AppendFormat("<{0}>1 {1:yyyy-MM-dd}T{1:HH:mm:ss.fff}Z {2} {3} {4} IHE+RFC-3881 - ",
-                    (SYSLOG_FACILITY * 8) + severity, DateTime.UtcNow, fqdn, Process.GetCurrentProcess().ProcessName, Process.GetCurrentProcess().Id);
-                syslogmessage.Append(AuditTransportUtil.CreateMessageBody(am));
-
-                // Send the message
-                // Create the dgram
-                String messageBody = syslogmessage.ToString();
-                using(TextWriter tw = new StreamWriter(tcpClient.GetStream(), new System.Text.ASCIIEncoding()))
-                {
-                    tw.Write(tw.Encoding.GetByteCount(messageBody));
-                    tw.Write(messageBody);
-                }
+                this.SendMessageInternal(tcpClient.GetStream(), am);
             }
             catch (Exception e)
             {
@@ -129,6 +94,58 @@ namespace AtnaApi.Transport
             }
         }
 
+        /// <summary>
+        /// Send a message
+        /// </summary>
+        protected virtual void SendMessageInternal(Stream stream, AuditMessage am)
+        {
+            StringBuilder syslogmessage = new StringBuilder();
+            int severity = 7;
+            switch (am.EventIdentification.EventOutcome)
+            {
+                case OutcomeIndicator.Success:
+                    severity = 5;
+                    break;
+                case OutcomeIndicator.MinorFail:
+                    severity = 4;
+                    break;
+                default:
+                    severity = 3;
+                    break;
+            }
 
+            string domainName = System.Net.NetworkInformation.IPGlobalProperties.GetIPGlobalProperties().DomainName;
+            string hostName = Dns.GetHostName();
+            string fqdn = "";
+            if (!hostName.Contains(domainName))
+                fqdn = hostName + "." + domainName;
+            else
+                fqdn = hostName;
+                
+            String iheFormat = this.MessageFormat == MessageFormatType.DICOM ? "DICOM" : "RFC-3881";
+
+            syslogmessage.AppendFormat("<{0}>1 {1:yyyy-MM-dd}T{1:HH:mm:ss.fff}Z {2} {3} {4} IHE+{5} - ",
+                (SYSLOG_FACILITY * 8) + severity, DateTime.UtcNow, fqdn, Process.GetCurrentProcess().ProcessName, Process.GetCurrentProcess().Id, iheFormat);
+            syslogmessage.Append(AuditTransportUtil.CreateMessageBodyEx(am, this.MessageFormat));
+
+            // Send the message
+            // Create the dgram
+            String messageBody = syslogmessage.ToString();
+
+#if DEBUG
+            Trace.TraceInformation("Sending AUDIT message {0}", messageBody);
+#endif
+            using (TextWriter tw = new StreamWriter(stream, new System.Text.ASCIIEncoding()))
+            {
+                tw.Write(tw.Encoding.GetByteCount(messageBody));
+                tw.Write(" ");
+                tw.Write(messageBody);
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the message format
+        /// </summary>
+        public MessageFormatType MessageFormat { get; set; }
     }
 }

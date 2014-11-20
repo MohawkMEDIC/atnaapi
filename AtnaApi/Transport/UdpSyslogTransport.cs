@@ -128,10 +128,11 @@ namespace AtnaApi.Transport
                 else
                     fqdn = hostName;
 
+                String iheFormat = this.MessageFormat == MessageFormatType.DICOM ? "DICOM" : "RFC-3881";
 
-                syslogmessage.AppendFormat("<{0}>1 {1:yyyy-MM-dd}T{1:HH:mm:ss.fff}Z {2} {3} {4} IHE+RFC-3881 - ",
-                    (SYSLOG_FACILITY * 8) + severity, DateTime.UtcNow, fqdn, Process.GetCurrentProcess().ProcessName, Process.GetCurrentProcess().Id);
-                syslogmessage.Append(AuditTransportUtil.CreateMessageBody(am));
+                syslogmessage.AppendFormat("<{0}>1 {1:yyyy-MM-dd}T{1:HH:mm:ss.fff}Z {2} {3} {4} IHE+{5} - ",
+                    (SYSLOG_FACILITY * 8) + severity, DateTime.UtcNow, fqdn, Process.GetCurrentProcess().ProcessName, Process.GetCurrentProcess().Id, iheFormat);
+                syslogmessage.Append(AuditTransportUtil.CreateMessageBodyEx(am, this.MessageFormat));
 
                 // Send the message
                 // Create the dgram
@@ -149,5 +150,9 @@ namespace AtnaApi.Transport
         }
 
 
+        /// <summary>
+        /// Gets or sets the message format
+        /// </summary>
+        public MessageFormatType MessageFormat { get; set; }
     }
 }
