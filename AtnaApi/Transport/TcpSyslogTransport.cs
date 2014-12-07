@@ -122,9 +122,9 @@ namespace AtnaApi.Transport
             else
                 fqdn = hostName;
                 
-            String iheFormat = this.MessageFormat == MessageFormatType.DICOM ? "DICOM" : "RFC-3881";
+            String iheFormat = this.MessageFormat == MessageFormatType.DICOM ? "DICOM+RFC3881" : "IHE+RFC3881";
 
-            syslogmessage.AppendFormat("<{0}>1 {1:yyyy-MM-dd}T{1:HH:mm:ss.fff}Z {2} {3} {4} IHE+{5} - ",
+            syslogmessage.AppendFormat("<{0}>1 {1:yyyy-MM-dd}T{1:HH:mm:ss.fff}Z {2} {3} {4} {5} - ",
                 (SYSLOG_FACILITY * 8) + severity, DateTime.UtcNow, fqdn, Process.GetCurrentProcess().ProcessName, Process.GetCurrentProcess().Id, iheFormat);
             syslogmessage.Append(AuditTransportUtil.CreateMessageBodyEx(am, this.MessageFormat));
 

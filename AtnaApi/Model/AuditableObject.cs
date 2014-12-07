@@ -31,6 +31,14 @@ namespace AtnaApi.Model
     public class AuditableObject
     {
         /// <summary>
+        /// Creates a new auditable object
+        /// </summary>
+        public AuditableObject()
+        {
+            this.ObjectDetail = new List<ObjectDetailType>();
+        }
+
+        /// <summary>
         /// Identifies the object in the event
         /// </summary>
         [XmlAttribute("ParticipantObjectID")]
@@ -62,17 +70,18 @@ namespace AtnaApi.Model
         [XmlElement("ParticipantObjectIDTypeCode")]
         public CodeValue<AuditableObjectIdType> IDTypeCode { get; set; }
         /// <summary>
-        /// Identifies the additional detail for the object
-        /// </summary>
-        [XmlElement("ParticipantObjectDetail")]
-        public List<ObjectDetailType> ObjectDetail { get; set; }
-        /// <summary>
         /// Participant object query
         /// </summary>
         [XmlElement("ParticipantObjectQuery")]
         [XmlElement("ParticipantObjectName")]
         [XmlChoiceIdentifier("ObjectSpecChoice")]
         public string ObjectSpec { get; set; }
+
+        /// <summary>
+        /// Identifies the additional detail for the object
+        /// </summary>
+        [XmlElement("ParticipantObjectDetail")]
+        public List<ObjectDetailType> ObjectDetail { get; set; }
 
         /// <summary>
         /// Gets or sets the audit choice
