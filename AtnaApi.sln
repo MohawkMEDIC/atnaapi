@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtnaApi", "AtnaApi\AtnaApi.csproj", "{0CF933E5-AF6C-46DF-AB10-68C79C800AF9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtnaApi.Test", "AtnaApi.Test\AtnaApi.Test.csproj", "{2DD93B58-C78A-456C-AC43-9821C1F51978}"
@@ -12,10 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{D1513EE9-957D-48A4-B40B-EC9556147151}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AtnaApi.Samples", "AtnaApi.Samples\AtnaApi.Samples.csproj", "{4A930B3F-A973-4934-AAE7-22BC0940A1B4}"
+EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = AtnaApi.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -29,8 +32,18 @@ Global
 		{2DD93B58-C78A-456C-AC43-9821C1F51978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DD93B58-C78A-456C-AC43-9821C1F51978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DD93B58-C78A-456C-AC43-9821C1F51978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A930B3F-A973-4934-AAE7-22BC0940A1B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A930B3F-A973-4934-AAE7-22BC0940A1B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A930B3F-A973-4934-AAE7-22BC0940A1B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A930B3F-A973-4934-AAE7-22BC0940A1B4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4A930B3F-A973-4934-AAE7-22BC0940A1B4} = {D1513EE9-957D-48A4-B40B-EC9556147151}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = AtnaApi.vsmdi
 	EndGlobalSection
 EndGlobal
