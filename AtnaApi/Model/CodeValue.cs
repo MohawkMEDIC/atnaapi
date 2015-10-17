@@ -172,5 +172,14 @@ namespace AtnaApi.Model
             : this(code)
         { this.CodeSystem = codeSystem; }
 
+
+        /// <summary>
+        /// Create a new instance of the audit code with the specified parameters
+        /// </summary>
+        /// <param name="code">The code</param>
+        /// <param name="codeSystem">The OID of the system from wich the code was drawn</param>
+        public CodeValue(T code, string codeSystem, String displayName)
+            : this(code, codeSystem)
+        { this.DisplayName = displayName; }
     }
 }

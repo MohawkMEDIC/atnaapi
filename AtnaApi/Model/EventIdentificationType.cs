@@ -32,61 +32,110 @@ namespace AtnaApi.Model
     /// </summary>
     public enum EventIdentifierType
     {
+        [Description("Provisioning Event")]
         [Category("IHE")]
         [XmlEnum("IHE0001")]
         ProvisioningEvent,
+        [Description("Medication Event")]
         [Category("IHE")]
         [XmlEnum("IHE0002")]
         MedicationEvent,
+        [Description("Resource Assignment")]
         [Category("IHE")]
         [XmlEnum("IHE0003")]
         ResourceAssignment,
+        [Description("Care Episode")]
         [Category("IHE")]
         [XmlEnum("IHE0004")]
         CareEpisode,
+        [Description("Care Protocol")]
         [Category("IHE")]
         [XmlEnum("IHE0005")]
         CareProtocol,
-        [Category("DCM")]
-        [XmlEnum("110111")]
-        ProcedureRecord,
-        [Category("DCM")]
-        [XmlEnum("110112")]
-        Query,
-        [Category("DCM")]
-        [XmlEnum("110114")]
-        UserAuthentication,
-        [Category("DCM")]
-        [XmlEnum("110110")]
-        PatientRecord,
-        [Category("DCM")]
-        [XmlEnum("110109")]
-        OrderRecord,
-        [Category("DCM")]
-        [XmlEnum("110108")]
-        NetowrkActivity,
-        [Category("DCM")]
-        [XmlEnum("110107")]
-        Import,
-        [Category("DCM")]
-        [XmlEnum("110106")]
-        Export,
-        [Category("DCM")]
-        [XmlEnum("110100")]
-        ApplicationActivity,
+        [Description("Disclosure")]
         [Category("IHE")]
         [XmlEnum("IHE0006")]
         Disclosure,
+        [Description("Patient Search Activity")]
         [Category("CDT")]
         [XmlEnum("CDT-100002")]
         CDTPatientSearchActivity,
+        [Description("Application Activity")]
         [Category("DCM")]
-        [XmlEnum("110132")]
-        UseOfRestrictedFunction,
+        [XmlEnum("110100")]
+        ApplicationActivity,
+        [Description("Audit Log Used")]
+        [Category("DCM")]
+        [XmlEnum("110101")]
+        AuditLogUsed,
+        [Description("Begin Transfer Instances")]
+        [Category("DCM")]
+        [XmlEnum("110102")]
+        BeginTransferInstances,
+        [Description("Instances Accessed")]
+        [Category("DCM")]
+        [XmlEnum("110103")]
+        DicomInstancesAccessed,
+        [Description("Instances Transferred")]
+        [Category("DCM")]
+        [XmlEnum("110104")]
+        DicomInstancesTransffered,
+        [Description("Study Deleted")]
+        [Category("DCM")]
+        [XmlEnum("110105")]
+        StudyDeleted,
+        [Description("Export")]
+        [Category("DCM")]
+        [XmlEnum("110106")]
+        Export,
+        [Description("Import")]
+        [Category("DCM")]
+        [XmlEnum("110107")]
+        Import,
+        [Description("Network Activity")]
+        [Category("DCM")]
+        [XmlEnum("110108")]
+        NetowrkActivity,
+        [Description("Order Record")]
+        [Category("DCM")]
+        [XmlEnum("110109")]
+        OrderRecord,
+        [Description("Patient Record")]
+        [Category("DCM")]
+        [XmlEnum("110110")]
+        PatientRecord,
+        [Description("Procedure Record")]
+        [Category("DCM")]
+        [XmlEnum("110111")]
+        ProcedureRecord,
+        [Description("Query")]
+        [Category("DCM")]
+        [XmlEnum("110112")]
+        Query,
+        [Description("Security Alert")]
+        [Category("DCM")]
+        [XmlEnum("110113")]
+        SecurityAlert,
+        [Description("User Authentication")]
+        [Category("DCM")]
+        [XmlEnum("110114")]
+        UserAuthentication,
+        [Description("Emergency Override Started")]
         [Category("DCM")]
         [XmlEnum("110127")]
         EmergencyOverrideStarted,
-
+        [Description("Use of a restricted function")]
+        [Category("DCM")]
+        [XmlEnum("110132")]
+        UseOfRestrictedFunction,
+        [Description("Login")]
+        [Category("DCM")]
+        [XmlEnum("110122")]
+        Login,
+        [Description("Logout")]
+        [Category("DCM")]
+        [XmlEnum("110123")]
+        Logout
     }
 
 
