@@ -129,12 +129,19 @@ namespace AtnaApi.Model
                 // Enum type?
                 if (typeof(T).IsEnum)
                 {
-                    FieldInfo fi = typeof(T).GetField(this.StrongCode.ToString());
-                    object[] category = fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-                    if (category.Length > 0)
-                        return (category[0] as DescriptionAttribute).Description;
-                    else
-                        return this.StrongCode.ToString();
+                    try
+                    {
+                        FieldInfo fi = typeof(T).GetField(this.StrongCode?.ToString());
+                        object[] category = fi?.GetCustomAttributes(typeof(DescriptionAttribute), false);
+                        if (category.Length > 0)
+                            return (category[0] as DescriptionAttribute)?.Description;
+                        else
+                            return this.StrongCode?.ToString();
+                    }
+                    catch
+                    {
+                        return null;
+                    }
 
                 }
                 return null;

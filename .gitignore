@@ -22,3 +22,5 @@ Thumbs.db
 *.dll
 *.lib
 *.sbr
+/AtnaApi.Samples/obj/Debug
+/AtnaApi/obj/Debug

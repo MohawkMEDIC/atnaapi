@@ -114,15 +114,15 @@ namespace AtnaApi.Transport
             {
                 XmlAttribute newAttr = xdocument.CreateAttribute("code");
                 newAttr.Value = attr.Value;
-                attr.ParentNode.Attributes.Append(newAttr);
-                attr.ParentNode.RemoveChild(attr);
+                attr.OwnerElement.Attributes.Append(newAttr);
+                attr.OwnerElement.Attributes.Remove(attr);
             }
             foreach (XmlAttribute attr in xdocument.SelectNodes("//*/@originalText"))
             {
                 XmlAttribute newAttr = xdocument.CreateAttribute("displayName");
                 newAttr.Value = attr.InnerText;
                 attr.OwnerElement.Attributes.Append(newAttr);
-                attr.OwnerElement.RemoveChild(attr);
+                attr.OwnerElement.Attributes.Remove(attr);
             }
 
             // Move the audit source type code
