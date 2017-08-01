@@ -1,0 +1,8 @@
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\bin\Debug\AtnaApi.Test.dll
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\bin\Debug\AtnaApi.Test.pdb
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\bin\Debug\AtnaApi.dll
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\bin\Debug\AtnaApi.pdb
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\obj\Debug\AtnaApi.Test.csprojResolveAssemblyReference.cache
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\obj\Debug\AtnaApi.Test.dll
+C:\Users\justi\Source\Repos\medicatna\AtnaApi.Test\obj\Debug\AtnaApi.Test.pdb

@@ -52,7 +52,7 @@ namespace AtnaApi.Model
                 {
                     FieldInfo fi = typeof(T).GetField(this.StrongCode.ToString());
                     object[] category = fi.GetCustomAttributes(typeof(CategoryAttribute), false);
-                    if (category.Length > 0)
+                    if (category?.Length > 0)
                         return (category[0] as CategoryAttribute).Category;
                 }
                 return null;
@@ -133,7 +133,7 @@ namespace AtnaApi.Model
                     {
                         FieldInfo fi = typeof(T).GetField(this.StrongCode?.ToString());
                         object[] category = fi?.GetCustomAttributes(typeof(DescriptionAttribute), false);
-                        if (category.Length > 0)
+                        if (category?.Length > 0)
                             return (category[0] as DescriptionAttribute)?.Description;
                         else
                             return this.StrongCode?.ToString();
