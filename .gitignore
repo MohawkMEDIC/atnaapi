@@ -24,3 +24,5 @@ Thumbs.db
 *.sbr
 /AtnaApi.Samples/obj/Debug
 /AtnaApi/obj/Debug
+*/obj/*
+.vs/

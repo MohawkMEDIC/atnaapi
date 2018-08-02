@@ -1,0 +1,18 @@
+﻿<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>AtnaApi</id>
+    <version>1.1.0.0</version>
+    <title>MEDIC Audit Trail and Node Authentication Audit API</title>
+    <authors>justin-fyfe, nityan</authors>
+    <owners>mohawkmedic</owners>
+    <licenseUrl>https://github.com/MohawkMEDIC/atnaapi/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/MohawkMEDIC/atnaapi</projectUrl>
+    <iconUrl>https://avatars3.githubusercontent.com/u/26844884?s=400&amp;u=0d772db7422a9cca45b670d9aaad2c7b3b6d7f89&amp;v=4</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description> ATNA Auditing API wraps transport, building, parsing and serialization of DICOM and RFC-3881 format audits</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <tags>ihe atna auditing dicom</tags>
+  </metadata>
+</package>
