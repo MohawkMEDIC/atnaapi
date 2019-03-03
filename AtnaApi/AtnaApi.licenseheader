@@ -1,7 +1,7 @@
 extensions: designer.cs generated.cs
 extensions: .cs .cpp .h
 /* 
- * MEDIC ATNA API 
+ * MEDIC ATNA API
  * Copyright 2014-%CurrentYear% Mohawk College of Applied Arts and Technology.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you 

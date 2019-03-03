@@ -26,3 +26,8 @@ Thumbs.db
 /AtnaApi/obj/Debug
 */obj/*
 .vs/
+AtnaApi.Samples/bin/
+AtnaApi/bin/
+AtnaApi.Test/bin/
+deploy/
+AtnaApi.sln.GhostDoc.user.dic

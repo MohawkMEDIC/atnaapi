@@ -17,12 +17,7 @@
  * Author: Justin
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace MARC.HI.EHRS.SHR.Core.Auditing
+namespace AtnaApi.Model
 {
     /// <summary>
     /// Represents codified data

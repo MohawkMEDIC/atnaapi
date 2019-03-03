@@ -18,14 +18,11 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AtnaApi.Attributes
 {
     /// <summary>
-    /// Identifies the fields that the particular data element belongs
+    /// Represents and identifies the fields that the particular data element belongs.
     /// </summary>
     public enum EventIdentificationFieldType
     {
@@ -36,7 +33,7 @@ namespace AtnaApi.Attributes
     }
 
     /// <summary>
-    /// Identifies the event identification field to be populated
+    /// Represents and identifies the event identification field to be populated.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
     public class EventIdentificationFieldAttribute : Attribute
