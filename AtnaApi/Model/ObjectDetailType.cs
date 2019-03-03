@@ -17,28 +17,71 @@
  * Author: Justin
  */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Xml.Serialization;
 
 namespace AtnaApi.Model
 {
     /// <summary>
-    /// Object detail type
+    /// Represents an object detail type.
     /// </summary>
     public class ObjectDetailType
     {
 
-        /// <summary>
-        /// Gets or sets the type of the detail
-        /// </summary>
-        [XmlAttribute("type")]
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ObjectDetailType"/> class.
+		/// </summary>
+		public ObjectDetailType()
+		{
+			
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ObjectDetailType"/> class.
+		/// </summary>
+		/// <param name="type">The type.</param>
+		public ObjectDetailType(string type)
+		{
+			this.Type = type;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ObjectDetailType"/> class.
+		/// </summary>
+		/// <param name="type">The type.</param>
+		/// <param name="value">The value.</param>
+		public ObjectDetailType(string type, byte[] value) : this(type)
+		{
+			this.Value = value;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="ObjectDetailType"/> class.
+		/// </summary>
+		/// <param name="type">The type.</param>
+		/// <param name="value">The value.</param>
+		public ObjectDetailType(string type, object value) : this(type)
+		{
+			var formatter = new BinaryFormatter();
+
+			using (var memoryStream = new MemoryStream())
+			{
+				formatter.Serialize(memoryStream, value);
+
+				this.Value = memoryStream.ToArray();
+			}
+		}
+
+
+		/// <summary>
+		/// Gets or sets the type of the detail.
+		/// </summary>
+		[XmlAttribute("type")]
         public string Type { get; set; }
 
         /// <summary>
-        /// Gets or sets the value of the detail
+        /// Gets or sets the value of the detail.
         /// </summary>
         [XmlAttribute("value")]
         public byte[] Value { get; set; }

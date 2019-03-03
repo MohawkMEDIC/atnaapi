@@ -20,44 +20,79 @@
 namespace AtnaApi.Model
 {
     /// <summary>
-    /// Represents codified data
+    /// Represents codified data.
     /// </summary>
     public class AuditCode
     {
-        /// <summary>
-        /// The OID of the code system from which the code is pulled
-        /// </summary>
-        public string CodeSystem { get; set; }
-        /// <summary>
-        /// The codified data
-        /// </summary>
-        public string Code { get; set; }
-        /// <summary>
-        /// The english display name for the code
-        /// </summary>
-        public string DisplayName { get; set; }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AuditCode"/> class.
+		/// </summary>
+		public AuditCode()
+		{
 
-        /// <summary>
-        /// Default ctor
-        /// </summary>
-        public AuditCode() { }
+		}
 
-        /// <summary>
-        /// Create a new instance of the audit code with the specified parameters
-        /// </summary>
-        /// <param name="code">The code</param>
-        public AuditCode(string code)
-            : this()
-        { this.Code = code; }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AuditCode"/> class.
+		/// </summary>
+		/// <param name="code">The code.</param>
+		public AuditCode(string code) : this()
+		{
+			this.Code = code;
+		}
 
-        /// <summary>
-        /// Create a new instance of the audit code with the specified parameters
-        /// </summary>
-        /// <param name="code">The code</param>
-        /// <param name="codeSystem">The OID of the system from wich the code was drawn</param>
-        public AuditCode(string code, string codeSystem)
-            : this(code)
-        { this.CodeSystem = codeSystem; }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AuditCode"/> class.
+		/// </summary>
+		/// <param name="code">The code.</param>
+		/// <param name="codeSystem">The code system.</param>
+		public AuditCode(string code, string codeSystem) : this(code)
+		{
+			this.CodeSystem = codeSystem;
+		}
 
-    }
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AuditCode"/> class.
+		/// </summary>
+		/// <param name="codeSystem">The code system.</param>
+		/// <param name="code">The code.</param>
+		/// <param name="displayName">The display name.</param>
+		public AuditCode(string codeSystem, string code, string displayName) : this(code, codeSystem)
+		{
+			this.DisplayName = displayName;
+		}
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="AuditCode"/> class.
+		/// </summary>
+		/// <param name="codeValue">The code value.</param>
+		public AuditCode(CodeValue<string> codeValue) : this(codeValue.Code, codeValue.CodeSystem, codeValue.DisplayName)
+		{
+		}
+
+		/// <summary>
+		/// Gets or sets the OID of the code system from which the code is pulled.
+		/// </summary>
+		public string CodeSystem { get; set; }
+
+		/// <summary>
+		/// Gets or sets the codified data.
+		/// </summary>
+		public string Code { get; set; }
+
+		/// <summary>
+		/// Gets or sets the english display name for the code.
+		/// </summary>
+		public string DisplayName { get; set; }
+
+		/// <summary>
+		/// Converts the audit code to a code value.
+		/// </summary>
+		/// <returns>Returns a code value.</returns>
+		public CodeValue<string> ToCodeValue()
+		{
+			return new CodeValue<string>(this.Code, this.CodeSystem, this.DisplayName);
+		}
+
+	}
 }
