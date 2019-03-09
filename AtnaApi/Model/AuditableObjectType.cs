@@ -14,22 +14,40 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *
- * Author: khannan
+ * Author: Justin
  */
 
-namespace AtnaApi.Samples
+using System.Xml.Serialization;
+
+namespace AtnaApi.Model
 {
 	/// <summary>
-	/// Represents the main program.
+	/// Represents the type of auditable objects in the system.
 	/// </summary>
-	public class Program
+	public enum AuditableObjectType
 	{
 		/// <summary>
-		/// Defines the entry point of the application.
+		/// Represents a person.
 		/// </summary>
-		/// <param name="args">The arguments.</param>
-		private static void Main(string[] args)
-		{
-		}
+		[XmlEnum("1")]
+		Person = 1,
+
+		/// <summary>
+		/// Represents a system object.
+		/// </summary>
+		[XmlEnum("2")]
+		SystemObject = 2,
+
+		/// <summary>
+		/// Represents an organization.
+		/// </summary>
+		[XmlEnum("3")]
+		Organization = 3,
+
+		/// <summary>
+		/// Represents another entity.
+		/// </summary>
+		[XmlEnum("4")]
+		Other = 4
 	}
 }

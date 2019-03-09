@@ -1,6 +1,6 @@
 ﻿/*
  * MEDIC ATNA API
- * Copyright 2014-2015 Mohawk College of Applied Arts and Technology.
+ * Copyright 2014-2019 Mohawk College of Applied Arts and Technology.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you
  * may not use this file except in compliance with the License. You may
@@ -26,35 +26,41 @@ using System.Security.Cryptography.X509Certificates;
 namespace AtnaApi.Transport
 {
 	/// <summary>
-	/// Secure TCP transport
+	/// Represents a secure TCP transport.
 	/// </summary>
+	/// <seealso cref="AtnaApi.Transport.TcpSyslogTransport" />
 	[Description("Secure TCP Transport")]
 	public class STcpSyslogTransport : TcpSyslogTransport
 	{
 		/// <summary>
-		/// Default ctor
+		/// Initializes a new instance of the <see cref="STcpSyslogTransport"/> class.
 		/// </summary>
 		public STcpSyslogTransport()
 		{
 		}
 
 		/// <summary>
-		/// Creates a new instance of the ATNA client
+		/// Initializes a new instance of the <see cref="STcpSyslogTransport"/> class.
 		/// </summary>
+		/// <param name="endpoint">The endpoint.</param>
 		public STcpSyslogTransport(IPEndPoint endpoint) : base(endpoint)
 		{
 		}
 
 		/// <summary>
-		/// Creates a new instance of the Syslog transport
+		/// Initializes a new instance of the <see cref="STcpSyslogTransport"/> class.
 		/// </summary>
+		/// <param name="endpoint">The endpoint.</param>
 		public STcpSyslogTransport(DnsEndPoint endpoint) : base(endpoint)
 		{
 		}
 
 		/// <summary>
-		/// Creates a new instance of the Syslog transport
+		/// Initializes a new instance of the <see cref="STcpSyslogTransport"/> class.
 		/// </summary>
+		/// <param name="endpoint">The endpoint.</param>
+		/// <param name="clientCert">The client cert.</param>
+		/// <param name="serverChain">The server chain.</param>
 		public STcpSyslogTransport(DnsEndPoint endpoint, X509Certificate2 clientCert, X509Certificate2 serverChain)
 			: base(endpoint)
 		{
@@ -63,49 +69,74 @@ namespace AtnaApi.Transport
 		}
 
 		/// <summary>
-		/// Gets or sets the client certificate
+		/// Gets or sets the client certificate.
 		/// </summary>
+		/// <value>The client certificate.</value>
 		public X509Certificate2 ClientCertificate { get; set; }
 
 		/// <summary>
-		/// Gets or sets the client certificate
+		/// Gets or sets the client certificate.
 		/// </summary>
+		/// <value>The server certificate.</value>
 		public X509Certificate2 ServerCertificate { get; set; }
 
+
 		/// <summary>
-		/// Send the message (wraps in an SSL Stream)
+		/// Send a message.
 		/// </summary>
-		protected override void SendMessageInternal(System.IO.Stream stream, Model.AuditMessage am)
+		/// <param name="stream">The stream.</param>
+		/// <param name="auditMessage">The audit message.</param>
+		protected override void SendMessageInternal(System.IO.Stream stream, Model.AuditMessage auditMessage)
 		{
-			using (SslStream wrapperStream = new SslStream(stream, false, this.RemoteCertificateValidation, null, EncryptionPolicy.RequireEncryption))
+			using (var wrapperStream = new SslStream(stream, false, this.RemoteCertificateValidation, null, EncryptionPolicy.RequireEncryption))
 			{
-				X509Certificate2Collection clientCerts = new X509Certificate2Collection() { this.ClientCertificate };
-				wrapperStream.AuthenticateAsClient(this.EndPoint.ToString(), clientCerts, System.Security.Authentication.SslProtocols.Tls, true);
-				base.SendMessageInternal(wrapperStream, am);
+				var clientCerts = new X509Certificate2Collection
+				{
+					this.ClientCertificate
+				};
+
+				wrapperStream.AuthenticateAsClient(this.EndPoint, clientCerts, System.Security.Authentication.SslProtocols.Tls, true);
+				base.SendMessageInternal(wrapperStream, auditMessage);
 			}
 		}
 
 		/// <summary>
-		/// Validation for certificates
+		/// Remotes the certificate validation.
 		/// </summary>
+		/// <param name="sender">The sender.</param>
+		/// <param name="certificate">The certificate.</param>
+		/// <param name="chain">The chain.</param>
+		/// <param name="sslPolicyErrors">The SSL policy errors.</param>
+		/// <returns><c>true</c> if the certificate is valid, <c>false</c> otherwise.</returns>
 		private bool RemoteCertificateValidation(object sender, X509Certificate certificate, X509Chain chain, SslPolicyErrors sslPolicyErrors)
 		{
 			// First Validate the chain
 			if (certificate == null || chain == null || this.ServerCertificate == null)
-				return this.ServerCertificate == null;
-			else
 			{
-				bool isValid = false;
-				foreach (var cer in chain.ChainElements)
-					if (cer.Certificate.Thumbprint == this.ServerCertificate.Thumbprint)
-						isValid = true;
-				if (!isValid)
-					Trace.TraceError("Certification authority from the supplied certificate doesn't match the expected thumbprint of the CA");
-				foreach (var stat in chain.ChainStatus)
-					Trace.TraceWarning("Certificate chain validation error: {0}", stat.StatusInformation);
-				isValid &= chain.ChainStatus.Length == 0;
-				return isValid;
+				return this.ServerCertificate == null;
 			}
+
+			var isValid = false;
+
+			foreach (var cer in chain.ChainElements)
+			{
+				if (cer.Certificate.Thumbprint == this.ServerCertificate.Thumbprint)
+					isValid = true;
+			}
+
+			if (!isValid)
+			{
+				Trace.TraceError("Certification authority from the supplied certificate doesn't match the expected thumbprint of the CA");
+			}
+
+			foreach (var stat in chain.ChainStatus)
+			{
+				Trace.TraceWarning("Certificate chain validation error: {0}", stat.StatusInformation);
+			}
+
+			isValid &= chain.ChainStatus.Length == 0;
+
+			return isValid;
 		}
 	}
 }

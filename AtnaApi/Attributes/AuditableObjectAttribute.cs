@@ -1,6 +1,6 @@
 ﻿/*
  * MEDIC ATNA API
- * Copyright 2014-2015 Mohawk College of Applied Arts and Technology.
+ * Copyright 2014-2019 Mohawk College of Applied Arts and Technology.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you
  * may not use this file except in compliance with the License. You may
@@ -30,17 +30,17 @@ namespace AtnaApi.Attributes
 	public enum ElementClassificationType
 	{
 		/// <summary>
-		/// Data contained is an identifier
+		/// Represents a classification type indicating that the data contained is an identifier.
 		/// </summary>
 		Identifier,
 
 		/// <summary>
-		/// Data contained is a query string
+		/// Represents a classification type indicating that the data contained is a query.
 		/// </summary>
 		Query,
 
 		/// <summary>
-		/// Data contained is a special object
+		/// Represents a classification type indicating that the data contained is an object.
 		/// </summary>
 		Object
 	}
@@ -64,43 +64,46 @@ namespace AtnaApi.Attributes
 		}
 
 		/// <summary>
-		/// Identifies where to place the data from the object
+		/// Represents where to place the data from the object.
 		/// </summary>
+		/// <value>The class.</value>
 		public ElementClassificationType Class { get; set; }
 
 		/// <summary>
-		/// Gets or sets the format of the data when placed in the audit
+		/// Gets or sets the format of the data when placed in the audit.
 		/// </summary>
 		public String DataFormat { get; set; }
 
 		/// <summary>
-		/// Identifies the type of identifier placed
+		/// Represents the type of identifier placed
 		/// </summary>
 		public AuditableObjectIdType IDTypeCode { get; set; }
 
 		/// <summary>
-		/// True if the property is the target of the lifecycle being described
+		/// True if the property is the target of the lifecycle being described.
 		/// </summary>
-		public Boolean LifeCycleTarget { get; set; }
+		public bool LifeCycleTarget { get; set; }
 
 		/// <summary>
-		/// Participant object name or property from which to get this information
+		/// Represents a participant object name or property from which to get this information.
 		/// </summary>
-		public String ParticipantObjectPropertyName { get; set; }
+		public string ParticipantObjectPropertyName { get; set; }
 
 		/// <summary>
-		/// Identifies the role which the object plays
+		/// Represents the role which the object plays.
 		/// </summary>
 		public AuditableObjectRole Role { get; set; }
 
 		/// <summary>
-		/// Identifies the type of object this property represents
+		/// Represents the type of object of this property.
 		/// </summary>
 		public AuditableObjectType Type { get; set; }
 
 		/// <summary>
-		/// Convert the attribute data into an auditable object
+		/// Converts the attribute data into an auditable object.
 		/// </summary>
+		/// <param name="value">The value.</param>
+		/// <returns>Returns the converted auditable object instance.</returns>
 		public AuditableObject ToAuditableObject(object value)
 		{
 			var retVal = new AuditableObject()

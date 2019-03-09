@@ -1,6 +1,6 @@
 ﻿/* 
  * MEDIC ATNA API 
- * Copyright 2014-2015 Mohawk College of Applied Arts and Technology.
+ * Copyright 2014-2019 Mohawk College of Applied Arts and Technology.
  * 
  * Licensed under the Apache License, Version 2.0 (the "License"); you 
  * may not use this file except in compliance with the License. You may 
@@ -18,7 +18,6 @@
  */
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Net;
@@ -42,25 +41,28 @@ namespace AtnaApi.Transport
         // Represents the syslog facility to use 
         public const int SYSLOG_FACILITY = 10;
 
-        /// <summary>
-        /// Default ctor
-        /// </summary>
-        public TcpSyslogTransport()
+
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TcpSyslogTransport"/> class.
+		/// </summary>
+		public TcpSyslogTransport()
         {
         }
 
-        /// <summary>
-        /// Creates a new instance of the ATNA client
-        /// </summary>
-        public TcpSyslogTransport(IPEndPoint endpoint)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TcpSyslogTransport"/> class.
+		/// </summary>
+		/// <param name="endpoint">The endpoint.</param>
+		public TcpSyslogTransport(IPEndPoint endpoint)
         {
             this.m_remoteEndpoint = endpoint;
         }
 
-        /// <summary>
-        /// Creates a new instance of the Syslog transport
-        /// </summary>
-        public TcpSyslogTransport(DnsEndPoint endpoint)
+		/// <summary>
+		/// Initializes a new instance of the <see cref="TcpSyslogTransport"/> class.
+		/// </summary>
+		/// <param name="endpoint">The endpoint.</param>
+		public TcpSyslogTransport(DnsEndPoint endpoint)
         {
             this.SetEndpointDns(endpoint);
         }

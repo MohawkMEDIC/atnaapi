@@ -1,6 +1,6 @@
 ﻿/*
  * MEDIC ATNA API
- * Copyright 2014-2015 Mohawk College of Applied Arts and Technology.
+ * Copyright 2014-2019 Mohawk College of Applied Arts and Technology.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you
  * may not use this file except in compliance with the License. You may
@@ -41,7 +41,7 @@ namespace AtnaApi.Transport
 		/// <summary>
 		/// Sends the message.
 		/// </summary>
-		/// <param name="am">The am.</param>
-		void SendMessage(AuditMessage am);
+		/// <param name="auditMessage">The audit message.</param>
+		void SendMessage(AuditMessage auditMessage);
 	}
 }
