@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
-    <id>AtnaApi</id>
-    <version>1.1.0.0</version>
+    <id>AtnaApi.NetStandard</id>
+    <version>1.2.0.0</version>
     <title>MEDIC Audit Trail and Node Authentication Audit API</title>
     <authors>justin-fyfe, nityan</authors>
     <owners>mohawkmedic</owners>
