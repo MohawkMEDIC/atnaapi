@@ -18,6 +18,7 @@
  */
 
 using System.IO;
+using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 using AtnaApi.Model;
@@ -59,31 +60,30 @@ namespace AtnaApi.Transport
 			}
 		}
 
-		/// <summary>
-		/// Convert audit string to DICOM.
-		/// </summary>
-		/// <param name="rfc3881Audit">The RFC3881 audit.</param>
-		/// <returns>Returns the converted audit.</returns>
-		public static string ConvertAuditToDICOM(string rfc3881Audit)
-		{
-			XmlDocument xdocument = new XmlDocument();
-			xdocument.LoadXml(rfc3881Audit);
-			foreach (XmlAttribute attr in xdocument.SelectNodes("//*/@code"))
-			{
-				XmlAttribute newAttr = xdocument.CreateAttribute("csd-code");
-				newAttr.Value = attr.Value;
-				attr.OwnerElement.Attributes.Append(newAttr);
-				attr.OwnerElement.Attributes.Remove(attr);
-			}
-			foreach (XmlAttribute attr in xdocument.SelectNodes("//*/@displayName"))
-			{
-				if (attr.OwnerElement.Attributes["originalText"] != null)
-					continue;
-				XmlAttribute newAttr = xdocument.CreateAttribute("originalText");
-				newAttr.Value = attr.InnerText;
-				attr.OwnerElement.Attributes.Append(newAttr);
-				attr.OwnerElement.Attributes.Remove(attr);
-			}
+        /// <summary>
+        /// Convert audit string to dicom
+        /// </summary>
+        public static string ConvertAuditToDICOM(string rfc3881Audit)
+        {
+            XmlDocument xdocument = new XmlDocument();
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(rfc3881Audit)))
+                xdocument.Load(ms);
+            foreach (XmlAttribute attr in xdocument.SelectNodes("//*/@code"))
+            {
+                XmlAttribute newAttr = xdocument.CreateAttribute("csd-code");
+                newAttr.Value = attr.Value;
+                attr.OwnerElement.Attributes.Append(newAttr);
+                attr.OwnerElement.Attributes.Remove(attr);
+            }
+            foreach (XmlAttribute attr in xdocument.SelectNodes("//*/@displayName"))
+            {
+                if (attr.OwnerElement.Attributes["originalText"] != null)
+                    continue;
+                XmlAttribute newAttr = xdocument.CreateAttribute("originalText");
+                newAttr.Value = attr.InnerText;
+                attr.OwnerElement.Attributes.Append(newAttr);
+                attr.OwnerElement.Attributes.Remove(attr);
+            }
 
 			// Move the audit source type code
 			XmlElement auditSourceType = xdocument.SelectSingleNode("//*[local-name() = 'AuditSourceIdentification']/*[local-name() = 'AuditSourceTypeCode']") as XmlElement;
@@ -101,32 +101,30 @@ namespace AtnaApi.Transport
 			return xdocument.OuterXml;
 		}
 
-		/// <summary>
-		/// Converts the audit to RFC3-881.
-		/// </summary>
-		/// <param name="rfc3881Audit">The RFC3881 audit.</param>
-		/// <returns>Returns teh converted audit message.</returns>
-		public static string ConvertAuditToRFC3881(string rfc3881Audit)
-		{
-			var document = new XmlDocument();
+        /// <summary>
+        /// Convert audit string to dicom
+        /// </summary>
+        public static string ConvertAuditToRFC3881(string rfc3881Audit)
+        {
+            
+            XmlDocument document = new XmlDocument();
 
-			document.LoadXml(rfc3881Audit);
-
-			foreach (XmlAttribute attribute in document.SelectNodes("//*/@csd-code"))
-			{
-				XmlAttribute newAttr = document.CreateAttribute("code");
-				newAttr.Value = attribute.Value;
-				attribute.OwnerElement.Attributes.Append(newAttr);
-				attribute.OwnerElement.Attributes.Remove(attribute);
-			}
-
-			foreach (XmlAttribute attribute in document.SelectNodes("//*/@originalText"))
-			{
-				XmlAttribute newAttr = document.CreateAttribute("displayName");
-				newAttr.Value = attribute.InnerText;
-				attribute.OwnerElement.Attributes.Append(newAttr);
-				attribute.OwnerElement.Attributes.Remove(attribute);
-			}
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(rfc3881Audit)))
+                document.Load(ms) ;
+            foreach (XmlAttribute attr in document.SelectNodes("//*/@csd-code"))
+            {
+                XmlAttribute newAttr = document.CreateAttribute("code");
+                newAttr.Value = attr.Value;
+                attr.OwnerElement.Attributes.Append(newAttr);
+                attr.OwnerElement.Attributes.Remove(attr);
+            }
+            foreach (XmlAttribute attr in document.SelectNodes("//*/@originalText"))
+            {
+                XmlAttribute newAttr = document.CreateAttribute("displayName");
+                newAttr.Value = attr.InnerText;
+                attr.OwnerElement.Attributes.Append(newAttr);
+                attr.OwnerElement.Attributes.Remove(attr);
+            }
 
 			// Move the audit source type code
 			if (document.SelectSingleNode("//*[local-name() = 'AuditSourceIdentification']") is XmlElement auditSourceType)

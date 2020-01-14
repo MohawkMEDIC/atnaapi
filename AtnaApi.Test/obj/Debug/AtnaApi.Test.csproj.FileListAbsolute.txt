@@ -1,0 +1,2 @@
+C:\Users\Justin Fyfe\source\repos\atnaapi\AtnaApi.Test\obj\Debug\AtnaApi.Test.csprojAssemblyReference.cache
+C:\Users\Justin Fyfe\source\repos\atnaapi\AtnaApi.Test\obj\Debug\AtnaApi.Test.csproj.CoreCompileInputs.cache

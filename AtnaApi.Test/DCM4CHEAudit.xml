@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AuditMessage xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.dcm4che.org/DICOM/audit-message.rnc">
+  <EventIdentification EventActionCode="E" EventDateTime="2018-12-07T02:11:33.992-08:00" EventOutcomeIndicator="0">
+    <EventID code="110112" displayName="Query" codeSystemName="DCM"/>
+    <EventTypeCode code="ITI-21" displayName="Patient Demographics Query" codeSystemName="IHE Transactions"/>
+    <EventOutcomeDescription>Success</EventOutcomeDescription>
+  </EventIdentification>
+  <ActiveParticipant UserID="admin" AlternativeUserID="HL7_CODEE\null" UserName="User, Super" UserIsRequestor="true">
+    <RoleIDCode code="System Developer"/>
+    <RoleIDCode code="API Privileges (View and Edit)"/>
+    <RoleIDCode code="Clinician"/>
+  </ActiveParticipant>
+  <ActiveParticipant UserID="OPENMRS_OFFLINE|TEST" AlternativeUserID="3108@OFFLINE_OMRS" UserIsRequestor="true" NetworkAccessPointID="OFFLINE_OMRS/192.168.1.107" NetworkAccessPointTypeCode="2">
+    <RoleIDCode code="110153" displayName="Source" codeSystemName="DCM"/>
+    <MediaType code="110037" displayName="URI" codeSystemName="DCM"/>
+  </ActiveParticipant>
+  <ActiveParticipant UserID="CR|MCAAT" UserIsRequestor="false" NetworkAccessPointID="127.0.0.1" NetworkAccessPointTypeCode="1">
+    <RoleIDCode code="110152" displayName="Destination" codeSystemName="DCM"/>
+  </ActiveParticipant>
+  <AuditSourceIdentification AuditEnterpriseSiteID="Unknown Location" AuditSourceID="HL7_CODEE">
+    <AuditSourceTypeCode code="3"/>
+  </AuditSourceIdentification>
+  <ParticipantObjectIdentification ParticipantObjectID="d601dfe7-f60a-4202-8296-0508f0a175d9" ParticipantObjectTypeCode="2" ParticipantObjectTypeCodeRole="24">
+    <ParticipantObjectIDTypeCode code="ITI-21" displayName="Patient Demographics Query" codeSystemName="IHE Transactions"/>
+    <ParticipantObjectQuery>TVNIfF5+XCZ8T1BFTk1SU19PRkZMSU5FfFRFU1R8Q1J8TUNBQVR8MjAxODEyMDcwMjExMjh8MEQ4MjU5NUE2RThBNUM0RjhBMDg5MEM3QTQwMjlFRjl8UUJQXlEyMl5RQlBfUTIxfGQ2MDFkZmU3LWY2MGEtNDIwMi04Mjk2LTA1MDhmMGExNzVkOXxQfDIuNXx8fEFMDVFQRHxRMjJeRmluZCBDYW5kaWRhdGVzXkhMN3xiNGIyNmY5Zi0xNTRjLTQ0YWItYmVmYi0wNjAwMjNmMGU3YWF8QFBJRC41LjJeWW91bmcN</ParticipantObjectQuery>
+    <ParticipantObjectDetail type="MSH-10" value="ZDYwMWRmZTctZjYwYS00MjAyLTgyOTYtMDUwOGYwYTE3NWQ5"/>
+  </ParticipantObjectIdentification>
+  <ParticipantObjectIdentification ParticipantObjectID="ce54898b-5c0e-47a9-966b-c6558dd2a880^^^&amp;DCGID&amp;ISO" ParticipantObjectTypeCode="1" ParticipantObjectTypeCodeRole="1">
+    <ParticipantObjectIDTypeCode code="2"/>
+    <ParticipantObjectDetail type="MSH-10" value="ZDYwMWRmZTctZjYwYS00MjAyLTgyOTYtMDUwOGYwYTE3NWQ5"/>
+  </ParticipantObjectIdentification>
+</AuditMessage>
