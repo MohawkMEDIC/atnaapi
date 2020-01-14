@@ -95,7 +95,7 @@ namespace AtnaApi.Model
         [Description("Network Activity")]
         [Category("DCM")]
         [XmlEnum("110108")]
-        NetowrkActivity,
+        NetworkActivity,
         [Description("Order Record")]
         [Category("DCM")]
         [XmlEnum("110109")]

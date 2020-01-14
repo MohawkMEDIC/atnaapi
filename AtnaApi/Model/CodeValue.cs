@@ -51,7 +51,7 @@ namespace AtnaApi.Model
                 if (typeof(T).IsEnum)
                 {
                     FieldInfo fi = typeof(T).GetField(this.StrongCode.ToString());
-                    object[] category = fi.GetCustomAttributes(typeof(CategoryAttribute), false);
+                    object[] category = fi?.GetCustomAttributes(typeof(CategoryAttribute), false);
                     if (category?.Length > 0)
                         return (category[0] as CategoryAttribute).Category;
                 }

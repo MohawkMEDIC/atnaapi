@@ -69,7 +69,8 @@ namespace AtnaApi.Transport
         public static string ConvertAuditToDICOM(string rfc3881Audit)
         {
             XmlDocument xdocument = new XmlDocument();
-            xdocument.LoadXml(rfc3881Audit);
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(rfc3881Audit)))
+                xdocument.Load(ms);
             foreach (XmlAttribute attr in xdocument.SelectNodes("//*/@code"))
             {
                 XmlAttribute newAttr = xdocument.CreateAttribute("csd-code");
@@ -108,8 +109,11 @@ namespace AtnaApi.Transport
         /// </summary>
         public static string ConvertAuditToRFC3881(string rfc3881Audit)
         {
+            
             XmlDocument xdocument = new XmlDocument();
-            xdocument.LoadXml(rfc3881Audit);
+
+            using (var ms = new MemoryStream(Encoding.UTF8.GetBytes(rfc3881Audit)))
+                xdocument.Load(ms) ;
             foreach (XmlAttribute attr in xdocument.SelectNodes("//*/@csd-code"))
             {
                 XmlAttribute newAttr = xdocument.CreateAttribute("code");
